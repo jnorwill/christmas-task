@@ -1,0 +1,12 @@
+{
+    "include": ["./src/**/*"],
+    "exclude": ["dist"],
+    "compilerOptions": {
+        "module": "ES6",
+        "esModuleInterop": true,
+        "target": "ES6",
+        "moduleResolution": "node",
+        "outDir": "dist",
+        "noImplicitAny": true
+    }
+}
