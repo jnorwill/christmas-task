@@ -33,6 +33,11 @@
     background-size: contain;
     width: 35px;
     height: 35px;
+    transition: 0.3s;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
   }
   &__sound {
     background: url(../../assets/svg/audio.svg);
@@ -40,12 +45,31 @@
     width: 35px;
     height: 35px;
     margin: 0 40px 0;
+    transition: 0.3s;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
   }
   &__label {
     font-size: 16px;
     line-height: 19px;
     display: flex;
     align-items: center;
+    transition: 0.3s;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+    .aside__input-checkbox:checked ~ .aside__checkbox {
+      background: #2299eb url(../../assets/svg/checked.svg) 50% 50% no-repeat;
+    }
+  }
+  &__input-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
   }
   &__checkbox {
     width: 20px;
@@ -53,12 +77,17 @@
     margin-right: 10px;
     background: transparent;
     border-radius: 5px;
+    border: #2299eb solid 1px;
     background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(157, 243, 255, 0.2) 100%);
+    transition: 0.3s;
+    &:hover {
+      cursor: pointer;
+    }
   }
   &__title {
     font-size: 18px;
     line-height: 22px;
-    margin-bottom: 16px;
+    margin: 10px 0 16px;
   }
   &__reset {
     font-size: 12px;
@@ -66,17 +95,24 @@
     width: 254px;
     height: 36px;
     background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(36, 197, 219, 0.15) 0%, rgba(36, 197, 219, 0) 100%);
+    border: rgb(34, 153, 235) solid 1px;
     border-radius: 30px;
-    margin: 0 auto 10px;
+    margin: 10px auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.3s;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
   }
 }
 .search {
   width: 254px;
   height: 36px;
   background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(36, 197, 219, 0.15) 0%, rgba(36, 197, 219, 0) 100%);
+  border: rgb(34, 153, 235) solid 1px;
   border-radius: 30px;
   display: flex;
   justify-content: space-between;
@@ -95,31 +131,50 @@
 }
 .sort {
   margin-top: 20px;
+  transition: 0.3px;
+  &:hover {
+    cursor: pointer;
+  }
   &__text {
     margin-right: 24px;
     font-size: 20px;
     line-height: 22px;
     text-transform: uppercase;
+    transition: 0.3px;
   }
   &__select {
     padding: 0 10px 0;
     width: 178px;
     height: 30px;
     background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(36, 197, 219, 0.15) 0%, rgba(36, 197, 219, 0) 100%);
+    border: rgb(34, 153, 235) solid 1px;
     border-radius: 30px;
+    transition: 0.3px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   &__option {
     background: #192f2d;
   }
 }
 
-.shape-list {
+.shape {
+  .shape__input:checked ~ .shape__item {
+    filter: invert(9%) sepia(63%) saturate(461%) hue-rotate(322deg) brightness(83%) contrast(88%);
+  }
   &__item {
-    padding-top: 60px;
+    display: block;
+    padding-top: 50px;
     width: 48px;
     font-size: 12px;
     line-height: 14px;
     text-align: center;
+    transition: 0.3s;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
     &_bell {
       background: url(../../assets/svg/bell.svg) 50% 0% no-repeat;
       background-size: contain;
@@ -164,6 +219,10 @@
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
       radial-gradient(57.23% 248.2% at 107.17% 104.02%, rgba(34, 153, 235, 0.92) 0%, rgba(34, 153, 235, 0.07) 100%),
       radial-gradient(104.22% 230.94% at -4.22% 0%, #24c5db 3.62%, rgba(36, 197, 219, 0.26) 55.1%);
+    transition: 0.3s;
+    &:hover {
+      cursor: pointer;
+    }
   }
   &__start {
     left: 0;
@@ -181,12 +240,33 @@
   margin-top: 15px;
 }
 
-.color-list {
+.color {
+  .color__input_white:checked ~ .color__item {
+    background: #ffffff url(../../assets/svg/checked-grey.svg) 50% 50% no-repeat;
+  }
+  .color__input_yellow:checked ~ .color__item {
+    background: #fdd700 url(../../assets/svg/checked-grey.svg) 50% 50% no-repeat;
+  }
+  .color__input_red:checked ~ .color__item {
+    background: #fd0000 url(../../assets/svg/checked.svg) 50% 50% no-repeat;
+  }
+  .color__input_blue:checked ~ .color__item {
+    background: #2299eb url(../../assets/svg/checked.svg) 50% 50% no-repeat;
+  }
+  .color__input_green:checked ~ .color__item {
+    background: #08aa05 url(../../assets/svg/checked.svg) 50% 50% no-repeat;
+  }
   &__item {
-    width: 24.8px;
+    display: block;
+    width: 24px;
     height: 24px;
     margin-right: 25px;
     border-radius: 5px;
+    transition: 0.3s;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
     &_white {
       background: #ffffff;
     }
