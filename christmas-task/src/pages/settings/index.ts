@@ -100,3 +100,227 @@ const addCards = (arr: arrSortType[]) => {
 
 addCards(data)
 
+const sortFavorites = (item: arrSortType) => {
+    return item.favorite
+}
+
+const sortBell = (item: arrSortType) => {
+    return item.shape === 'колокольчик'
+}
+
+const sortBall = (item: arrSortType) => {
+    return item.shape === 'шар'
+}
+const sortCone = (item: arrSortType) => {
+    return item.shape === 'шишка'
+}
+const sortSnowflake = (item: arrSortType) => {
+    return item.shape === 'снежинка'
+}
+const sortToy = (item: arrSortType) => {
+    return item.shape === 'фигурка'
+}
+
+const sortWhite = (item: arrSortType) => {
+    return item.color === 'белый'
+}
+const sortYellow = (item: arrSortType) => {
+    return item.color === 'желтый'
+}
+const sortRed = (item: arrSortType) => {
+    return item.color === 'красный'
+}
+const sortBlue = (item: arrSortType) => {
+    return item.color === 'синий'
+}
+const sortGreen = (item: arrSortType) => {
+    return item.color === 'зелёный'
+}
+
+const sortLargeSize = (item: arrSortType) => {
+    return item.size === 'большой'
+}
+const sortMediumSize = (item: arrSortType) => {
+    return item.size === 'средний'
+}
+const sortSmallSize = (item: arrSortType) => {
+    return item.size === 'малый'
+}
+
+const buttonFavorites = document.getElementById('favorites') as HTMLInputElement
+const buttonBell = document.getElementById('bell') as HTMLInputElement
+const buttonBall = document.getElementById('ball') as HTMLInputElement
+const buttonCone = document.getElementById('cone') as HTMLInputElement
+const buttonSnowflake = document.getElementById('snowflake') as HTMLInputElement
+const buttonToy = document.getElementById('toy') as HTMLInputElement
+const buttonWhite = document.getElementById('white') as HTMLInputElement
+const buttonYellow = document.getElementById('yellow') as HTMLInputElement
+const buttonRed = document.getElementById('red') as HTMLInputElement
+const buttonBlue = document.getElementById('blue') as HTMLInputElement
+const buttonGreen = document.getElementById('green') as HTMLInputElement
+const buttonLargeSize = document.getElementById('large') as HTMLInputElement
+const buttonMediumSize = document.getElementById('medium') as HTMLInputElement
+const buttonSmallSize = document.getElementById('small') as HTMLInputElement
+
+
+document.addEventListener('click', (event) => {
+    switch (event.target) {
+        case buttonFavorites:
+            setTimeout(() => {
+                if (buttonFavorites.checked) {
+                    allFilters.sortFavorites = sortFavorites
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortFavorites
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonBell:
+            setTimeout(() => {
+                if (buttonBell.checked) {
+                    allFilters.sortBell = sortBell
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortBell
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonBall:
+            setTimeout(() => {
+                if (buttonBall.checked) {
+                    allFilters.sortBall = sortBall
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortBall
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonCone:
+            setTimeout(() => {
+                if (buttonCone.checked) {
+                    allFilters.sortCone = sortCone
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortCone
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonSnowflake:
+            setTimeout(() => {
+                if (buttonSnowflake.checked) {
+                    allFilters.sortSnowflake = sortSnowflake
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortSnowflake
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonToy:
+            setTimeout(() => {
+                if (buttonToy.checked) {
+                    allFilters.sortToy = sortToy
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortToy
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonWhite:
+            setTimeout(() => {
+                if (buttonWhite.checked) {
+                    allFilters.sortWhite = sortWhite
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortWhite
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonYellow:
+            setTimeout(() => {
+                if (buttonYellow.checked) {
+                    allFilters.sortYellow = sortYellow
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortYellow
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonRed:
+            setTimeout(() => {
+                if (buttonRed.checked) {
+                    allFilters.sortRed = sortRed
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortRed
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonBlue:
+            setTimeout(() => {
+                if (buttonBlue.checked) {
+                    allFilters.sortBlue = sortBlue
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortBlue
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonGreen:
+            setTimeout(() => {
+                if (buttonGreen.checked) {
+                    allFilters.sortGreen = sortGreen
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortGreen
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonLargeSize:
+            setTimeout(() => {
+                if (buttonLargeSize.checked) {
+                    allFilters.sortLargeSize = sortLargeSize
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortLargeSize
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonMediumSize:
+            setTimeout(() => {
+                if (buttonMediumSize.checked) {
+                    allFilters.sortMediumSize = sortMediumSize
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortMediumSize
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        case buttonSmallSize:
+            setTimeout(() => {
+                if (buttonSmallSize.checked) {
+                    allFilters.sortSmallSize = sortSmallSize
+                    addCards(sortedArr)
+                } else {
+                    delete allFilters.sortSmallSize
+                    addCards(sortedArr)
+                }
+            }, 100);
+            break;
+        default:
+            break;
+    }
+
+})
