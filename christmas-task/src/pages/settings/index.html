@@ -18,7 +18,7 @@
         </select>
       </div>
       <label class="aside__label">
-        <input class="aside__input-checkbox aside__liked"
+        <input id="favorites" class="aside__input-checkbox"
           type="checkbox" placeholder="Поиск">
         <span class="aside__checkbox"></span>
         Только любимые
@@ -27,23 +27,23 @@
         <h3 class="aside__title">Форма</h3>
         <div class="aside__all-width-container shape">
           <label class="shape__label">
-            <input class="shape__input aside__input-checkbox" type="checkbox">
+            <input id="bell" class="shape__input aside__input-checkbox" type="checkbox">
             <span class="shape__item shape__item_bell"></span>
           </label>
           <label class="shape__label">
-            <input class="shape__input aside__input-checkbox" type="checkbox">
+            <input id="ball" class="shape__input aside__input-checkbox" type="checkbox">
             <span class="shape__item shape__item_ball"></span>
           </label>
           <label class="shape__label">
-            <input class="shape__input aside__input-checkbox" type="checkbox">
+            <input id="cone" class="shape__input aside__input-checkbox" type="checkbox">
             <span class="shape__item shape__item_cone"></span>
           </label>
           <label class="shape__label">
-            <input class="shape__input aside__input-checkbox" type="checkbox">
+            <input id="snowflake" class="shape__input aside__input-checkbox" type="checkbox">
             <span class="shape__item shape__item_snowflake"></span>
           </label>
           <label class="shape__label">
-            <input class="shape__input aside__input-checkbox" type="checkbox">
+            <input id="toy" class="shape__input aside__input-checkbox" type="checkbox">
             <span class="shape__item shape__item_toy"></span>
           </label>
         </div>
@@ -78,23 +78,23 @@
         <h3 class="aside__title">Цвет</h3>
         <div class="aside__container color">
           <label class="color__label">
-            <input class="aside__input-checkbox color__input_white" type="checkbox">
+            <input id="white" class="aside__input-checkbox color__input_white" type="checkbox">
             <span class="color__item color__item_white"></span>
           </label>
           <label class="color__label">
-            <input class="aside__input-checkbox color__input_yellow" type="checkbox">
+            <input id="yellow" class="aside__input-checkbox color__input_yellow" type="checkbox">
             <span class="color__item color__item_yellow"></span>
           </label>
           <label class="color__label">
-            <input class="aside__input-checkbox color__input_red" type="checkbox">
+            <input id="red" class="aside__input-checkbox color__input_red" type="checkbox">
             <span class="color__item color__item_red"></span>
           </label>
           <label class="color__label">
-            <input class="aside__input-checkbox color__input_blue" type="checkbox">
+            <input id="blue" class="aside__input-checkbox color__input_blue" type="checkbox">
             <span class="color__item color__item_blue"></span>
           </label>
           <label class="color__label">
-            <input class="aside__input-checkbox color__input_green" type="checkbox">
+            <input id="green" class="aside__input-checkbox color__input_green" type="checkbox">
             <span class="color__item color__item_green"></span>
           </label>
         </div>
@@ -103,19 +103,19 @@
         <h3 class="aside__title">Размер</h3>
         <div class="aside__container size">
           <label class="aside__label">
-            <input class="aside__input-checkbox size__input_large"
+            <input id="large" class="aside__input-checkbox size__input_large"
               type="checkbox">
             <span class="aside__checkbox"></span>
             Большой
           </label>
           <label class="aside__label">
-            <input class="aside__input-checkbox size__input_medium"
+            <input id="medium" class="aside__input-checkbox size__input_medium"
               type="checkbox">
             <span class="aside__checkbox"></span>
             Средний
           </label>
           <label class="aside__label">
-            <input class="aside__input-checkbox size__input_small"
+            <input id="small" class="aside__input-checkbox size__input_small"
               type="checkbox">
             <span class="aside__checkbox"></span>
             Маленький
@@ -124,11 +124,8 @@
       </div>
       <input type="reset" class="aside__reset" value="Сбросить фильтры">
     </aside>
-    <div class="catalog">
-      <h2 class="catalog__title">Игрушки</h2>
-      <div class="catalog__list">
-        <div></div>
-      </div>
+    <div class="catalog-container">
+      <div class="catalog"></div>
     </div>
   </main>
   <footer class="footer">

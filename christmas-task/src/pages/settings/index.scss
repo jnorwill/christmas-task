@@ -1,8 +1,6 @@
 .settings {
   padding: 50px 100px;
   height: 100vh;
-
-  // height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -11,8 +9,10 @@
   flex-grow: 1;
 }
 .aside {
+  position: fixed;
+  height: 90vh;
+  border: 1px solid #278d9f;
   background: #192f2d;
-  max-width: 30%;
   padding: 20px;
   border-radius: 30px;
   display: flex;
@@ -40,7 +40,7 @@
     }
   }
   &__sound {
-    background: url(../../assets/svg/audio.svg);
+    background: url(../../assets/svg/mute.svg);
     background-size: contain;
     width: 35px;
     height: 35px;
@@ -109,7 +109,7 @@
   }
 }
 .search {
-  width: 254px;
+  width: 290px;
   height: 36px;
   background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(36, 197, 219, 0.15) 0%, rgba(36, 197, 219, 0) 100%);
   border: rgb(34, 153, 235) solid 1px;
@@ -287,4 +287,60 @@
 .size {
   display: flex;
   justify-content: space-between;
+}
+.catalog {
+  margin-left: 482px;
+  align-self: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: 1px solid #278d9f;
+  background-color: rgba(31, 112, 127, 0.3);
+  width: 320px;
+  height: 280px;
+  padding: 20px;
+  border-radius: 10px;
+  font-family: Steppe;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  margin: 0 0 30px 30px;
+  &__tittle {
+    font-family: Neucha;
+    font-size: 22px;
+    line-height: 24px;
+  }
+  &__container {
+    display: flex;
+    &_left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    &_right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 230px;
+      padding: 20px;
+    }
+  }
+  &__button {
+    height: 40px;
+    width: 75px;
+    background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(36, 197, 219, 0.15) 0%, rgba(36, 197, 219, 0) 100%);
+    border: #2299eb solid 1px;
+    border-radius: 30px;
+    transition: 0.3s;
+    &:hover {
+      cursor: pointer;
+      background: #2299eb;
+    }
+    &_active {
+      background: #2299eb;
+    }
+  }
 }
