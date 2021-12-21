@@ -163,7 +163,55 @@ const buttonMediumSize = document.getElementById('medium') as HTMLInputElement
 const buttonSmallSize = document.getElementById('small') as HTMLInputElement
 
 
+const localStorageSelected = localStorage.getItem('selected card')
+let selectArr: arrSortType[] = []
+const selectHtml = document.querySelector('.aside__select')
+if (localStorageSelected) {
+    const button = document.querySelectorAll('.card__button')
+    button.forEach((item) => {
+        const buttonContainer = item.parentElement
+        const cardContainer = buttonContainer.parentElement
+        const cardTitle: string = cardContainer.previousElementSibling.innerHTML
+        if (localStorageSelected.split(',').find(item => item === cardTitle)) {
+            item.classList.add('card__button_active')
+        }
+    })
+    selectArr = localStorageSelected.split(',').map(element => {
+        return data.find(item => item.name === element)
+    });
+    selectHtml.innerHTML = `${selectArr.length}`
+}
+
+const addSelect = () => {
+    selectHtml.innerHTML = `${selectArr.length}`
+}
+
 document.addEventListener('click', (event) => {
+    const buttonSelect = event.target as HTMLElement
+    if (buttonSelect.classList.contains('card__button')) {
+        const buttonContainer = buttonSelect.parentElement
+        const cardContainer = buttonContainer.parentElement
+        const cardTitle: string = cardContainer.previousElementSibling.innerHTML
+
+        const card: arrSortType = data.find(item => item.name === cardTitle);
+        const index = selectArr.findIndex(item => item.name === cardTitle)
+
+        if (!buttonSelect.classList.contains('card__button_active')) {
+            if (selectArr.length < 20) {
+                buttonSelect.classList.add('card__button_active')
+                if (!selectArr.find(item => item.name === cardTitle)) {
+                    selectArr.push(card)
+                    addSelect()
+                }
+            } else { alert("Извините, все слоты заполнены") }
+        } else {
+            buttonSelect.classList.remove('card__button_active')
+            selectArr.splice(index, 1)
+        }
+
+        let arrName: string[] = selectArr.map(item => item.name)
+        localStorage.setItem('selected card', `${arrName.join(',')}`)
+    }
     switch (event.target) {
         case buttonFavorites:
             setTimeout(() => {

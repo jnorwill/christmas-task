@@ -28,19 +28,21 @@
     justify-content: space-between;
     align-items: center;
   }
-  &__snow {
-    background: url(../../assets/svg/snow.svg);
+  &__select {
+    background: url(../../assets/svg/ball.svg) no-repeat;
     background-size: contain;
     width: 35px;
     height: 35px;
-    transition: 0.3s;
-    &:hover {
-      opacity: 0.8;
-      cursor: pointer;
-    }
+    color: #192f2d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    font-size: 22px;
+    line-height: 24px;
   }
   &__sound {
-    background: url(../../assets/svg/mute.svg);
+    background: url(../../assets/svg/mute.svg) no-repeat;
     background-size: contain;
     width: 35px;
     height: 35px;
@@ -340,7 +342,8 @@
       background: #2299eb;
     }
     &_active {
-      background: #2299eb;
+      background: #cbb77a;
+      border: none;
     }
   }
 }
