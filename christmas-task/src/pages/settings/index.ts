@@ -14,7 +14,6 @@ type arrSortType = {
     favorite: boolean,
 }
 type arrFiltersType = {
-    sortFavorites?: (item: arrSortType) => boolean,
     sortBell?: (item: arrSortType) => boolean,
     sortBall?: (item: arrSortType) => boolean,
     sortCone?: (item: arrSortType) => boolean,
@@ -30,21 +29,114 @@ type arrFiltersType = {
     sortSmallSize?: (item: arrSortType) => boolean,
 }
 
-let allFilters: arrFiltersType = {}
+
+
+const sortFavorites = (item: arrSortType) => {
+    return item.favorite
+}
+
+const sortBell = (item: arrSortType) => {
+    return item.shape === 'колокольчик'
+}
+
+const sortBall = (item: arrSortType) => {
+    return item.shape === 'шар'
+}
+const sortCone = (item: arrSortType) => {
+    return item.shape === 'шишка'
+}
+const sortSnowflake = (item: arrSortType) => {
+    return item.shape === 'снежинка'
+}
+const sortToy = (item: arrSortType) => {
+    return item.shape === 'фигурка'
+}
+
+const sortWhite = (item: arrSortType) => {
+    return item.color === 'белый'
+}
+const sortYellow = (item: arrSortType) => {
+    return item.color === 'желтый'
+}
+const sortRed = (item: arrSortType) => {
+    return item.color === 'красный'
+}
+const sortBlue = (item: arrSortType) => {
+    return item.color === 'синий'
+}
+const sortGreen = (item: arrSortType) => {
+    return item.color === 'зелёный'
+}
+
+const sortLargeSize = (item: arrSortType) => {
+    return item.size === 'большой'
+}
+const sortMediumSize = (item: arrSortType) => {
+    return item.size === 'средний'
+}
+const sortSmallSize = (item: arrSortType) => {
+    return item.size === 'малый'
+}
+
+const globalFilters: {
+    shape: arrFiltersType,
+    color: arrFiltersType,
+    size: arrFiltersType
+} = {
+    shape: {
+        sortBell,
+        sortBall,
+        sortCone,
+        sortSnowflake,
+        sortToy,
+    },
+    color: {
+        sortWhite,
+        sortYellow,
+        sortRed,
+        sortBlue,
+        sortGreen,
+    },
+    size: {
+        sortLargeSize,
+        sortMediumSize,
+        sortSmallSize,
+    },
+}
+
+
+
+let allAppliedFilters: {
+    shape: arrFiltersType,
+    color: arrFiltersType,
+    size: arrFiltersType,
+} = {
+    shape: {},
+    color: {},
+    size: {},
+}
 
 let sortedArr: arrSortType[]
 
+const formSortedArr = () => {
+    sortedArr = data.filter((element) => {
+        return Object.values(allAppliedFilters).every((item: arrFiltersType) => {
+            return Object.values(item).some((func: (item: arrSortType) => boolean) => {
+                // console.log(func)
+                return func(element)
+            })
+        })
+    })
+}
 
 const addCards = (arr: arrSortType[]) => {
-    sortedArr = data.filter((element) => {
-        return Object.values(allFilters).every((item: (item: arrSortType) => boolean) => item(element))
-    })
+
     const catalogContainerHtml = document.querySelector('.catalog')
     const catalogHtml = document.createElement('div');
     catalogHtml.className = "catalog"
     catalogContainerHtml.replaceWith(catalogHtml);
 
-    sortedArr.forEach((item) => {
+    arr.forEach((item) => {
         let card = document.createElement('div');
         card.className = "card"
         catalogHtml.append(card);
@@ -97,70 +189,82 @@ const addCards = (arr: arrSortType[]) => {
 
     })
 }
+let arrShape: string[] = []
+let arrColor: string[] = []
+let arrSize: string[] = []
 
-addCards(data)
 
-const sortFavorites = (item: arrSortType) => {
-    return item.favorite
+const formAllAppliedFilters = () => {
+    const localStorageSortShape = localStorage.getItem('shape')
+    const localStorageSortColor = localStorage.getItem('color')
+    const localStorageSortSize = localStorage.getItem('size')
+    if (localStorageSortShape) {
+        localStorageSortShape.split(',').forEach((item:
+            'sortBell' |
+            'sortBall' |
+            'sortCone' |
+            'sortSnowflake' |
+            'sortToy'
+        ) => {
+            allAppliedFilters.shape[item] = globalFilters.shape[item]
+            const buttonChecked = document.getElementById(`${item}`) as HTMLInputElement
+            buttonChecked.checked = true
+            arrShape = localStorageSortShape.split(',')
+        })
+    } else {
+        allAppliedFilters.shape = { ...globalFilters.shape }
+    }
+    if (localStorageSortColor) {
+        localStorageSortColor.split(',').forEach((item:
+            'sortWhite' |
+            'sortYellow' |
+            'sortRed' |
+            'sortBlue' |
+            'sortGreen'
+        ) => {
+            allAppliedFilters.color[item] = globalFilters.color[item]
+            const buttonChecked = document.getElementById(`${item}`) as HTMLInputElement
+            buttonChecked.checked = true
+            arrColor = localStorageSortColor.split(',')
+        })
+    } else {
+        allAppliedFilters.color = { ...globalFilters.color }
+    }
+    if (localStorageSortSize) {
+        localStorageSortSize.split(',').forEach((item:
+            'sortLargeSize' |
+            'sortMediumSize' |
+            'sortSmallSize'
+        ) => {
+            allAppliedFilters.size[item] = globalFilters.size[item]
+            const buttonChecked = document.getElementById(`${item}`) as HTMLInputElement
+            buttonChecked.checked = true
+            arrSize = localStorageSortSize.split(',')
+        })
+    } else {
+        allAppliedFilters.size = { ...globalFilters.size }
+    }
+
+
+    formSortedArr()
+    addCards(sortedArr)
 }
 
-const sortBell = (item: arrSortType) => {
-    return item.shape === 'колокольчик'
-}
+formAllAppliedFilters()
 
-const sortBall = (item: arrSortType) => {
-    return item.shape === 'шар'
-}
-const sortCone = (item: arrSortType) => {
-    return item.shape === 'шишка'
-}
-const sortSnowflake = (item: arrSortType) => {
-    return item.shape === 'снежинка'
-}
-const sortToy = (item: arrSortType) => {
-    return item.shape === 'фигурка'
-}
-
-const sortWhite = (item: arrSortType) => {
-    return item.color === 'белый'
-}
-const sortYellow = (item: arrSortType) => {
-    return item.color === 'желтый'
-}
-const sortRed = (item: arrSortType) => {
-    return item.color === 'красный'
-}
-const sortBlue = (item: arrSortType) => {
-    return item.color === 'синий'
-}
-const sortGreen = (item: arrSortType) => {
-    return item.color === 'зелёный'
-}
-
-const sortLargeSize = (item: arrSortType) => {
-    return item.size === 'большой'
-}
-const sortMediumSize = (item: arrSortType) => {
-    return item.size === 'средний'
-}
-const sortSmallSize = (item: arrSortType) => {
-    return item.size === 'малый'
-}
-
-const buttonFavorites = document.getElementById('favorites') as HTMLInputElement
-const buttonBell = document.getElementById('bell') as HTMLInputElement
-const buttonBall = document.getElementById('ball') as HTMLInputElement
-const buttonCone = document.getElementById('cone') as HTMLInputElement
-const buttonSnowflake = document.getElementById('snowflake') as HTMLInputElement
-const buttonToy = document.getElementById('toy') as HTMLInputElement
-const buttonWhite = document.getElementById('white') as HTMLInputElement
-const buttonYellow = document.getElementById('yellow') as HTMLInputElement
-const buttonRed = document.getElementById('red') as HTMLInputElement
-const buttonBlue = document.getElementById('blue') as HTMLInputElement
-const buttonGreen = document.getElementById('green') as HTMLInputElement
-const buttonLargeSize = document.getElementById('large') as HTMLInputElement
-const buttonMediumSize = document.getElementById('medium') as HTMLInputElement
-const buttonSmallSize = document.getElementById('small') as HTMLInputElement
+const buttonBell = document.getElementById('sortBell') as HTMLInputElement
+const buttonBall = document.getElementById('sortBall') as HTMLInputElement
+const buttonCone = document.getElementById('sortCone') as HTMLInputElement
+const buttonSnowflake = document.getElementById('sortSnowflake') as HTMLInputElement
+const buttonToy = document.getElementById('sortToy') as HTMLInputElement
+const buttonWhite = document.getElementById('sortWhite') as HTMLInputElement
+const buttonYellow = document.getElementById('sortYellow') as HTMLInputElement
+const buttonRed = document.getElementById('sortRed') as HTMLInputElement
+const buttonBlue = document.getElementById('sortBlue') as HTMLInputElement
+const buttonGreen = document.getElementById('sortGreen') as HTMLInputElement
+const buttonLargeSize = document.getElementById('sortLargeSize') as HTMLInputElement
+const buttonMediumSize = document.getElementById('sortMediumSize') as HTMLInputElement
+const buttonSmallSize = document.getElementById('sortSmallSize') as HTMLInputElement
 
 
 const localStorageSelected = localStorage.getItem('selected card')
@@ -182,11 +286,57 @@ if (localStorageSelected) {
     selectHtml.innerHTML = `${selectArr.length}`
 }
 
-const addSelect = () => {
+const addSelectNumber = () => {
     selectHtml.innerHTML = `${selectArr.length}`
+}
+addSelectNumber()
+
+const functionOnClick = (button: HTMLInputElement, funcArr: string[], funcType: 'shape' | 'size' | 'color', funcName:
+    'sortBell' |
+    'sortBall' |
+    'sortCone' |
+    'sortSnowflake' |
+    'sortToy' |
+    'sortWhite' |
+    'sortYellow' |
+    'sortRed' |
+    'sortBlue' |
+    'sortGreen' |
+    'sortLargeSize' |
+    'sortMediumSize' |
+    'sortSmallSize') => {
+    if (button.checked) {
+        const localStorageSort = localStorage.getItem(`${funcType}`)
+        if (!localStorageSort) {
+            allAppliedFilters[funcType] = {}
+        }
+        allAppliedFilters[funcType][funcName] = globalFilters[funcType][funcName]
+        funcArr.push(`${funcName}`)
+        localStorage.setItem(`${funcType}`, `${funcArr}`)
+        formSortedArr()
+        addCards(sortedArr)
+    } else {
+        const index = funcArr.findIndex((item: any) => item === `${funcName}`)
+        funcArr.splice(index, 1)
+        localStorage.setItem(`${funcType}`, `${funcArr}`)
+        setTimeout(() => {
+            const localStorageSort = localStorage.getItem(`${funcType}`)
+            if (localStorageSort) {
+                delete allAppliedFilters[funcType][funcName]
+                formSortedArr()
+                addCards(sortedArr)
+            } else {
+                allAppliedFilters[funcType] = { ...globalFilters[funcType] }
+                formSortedArr()
+                addCards(sortedArr)
+            }
+        }, 100)
+    }
+
 }
 
 document.addEventListener('click', (event) => {
+
     const buttonSelect = event.target as HTMLElement
     if (buttonSelect.classList.contains('card__button')) {
         const buttonContainer = buttonSelect.parentElement
@@ -201,171 +351,57 @@ document.addEventListener('click', (event) => {
                 buttonSelect.classList.add('card__button_active')
                 if (!selectArr.find(item => item.name === cardTitle)) {
                     selectArr.push(card)
-                    addSelect()
+                    addSelectNumber()
                 }
             } else { alert("Извините, все слоты заполнены") }
         } else {
             buttonSelect.classList.remove('card__button_active')
             selectArr.splice(index, 1)
+            addSelectNumber()
         }
-
         let arrName: string[] = selectArr.map(item => item.name)
         localStorage.setItem('selected card', `${arrName.join(',')}`)
     }
+
     switch (event.target) {
-        case buttonFavorites:
-            setTimeout(() => {
-                if (buttonFavorites.checked) {
-                    allFilters.sortFavorites = sortFavorites
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortFavorites
-                    addCards(sortedArr)
-                }
-            }, 100);
-            break;
         case buttonBell:
-            setTimeout(() => {
-                if (buttonBell.checked) {
-                    allFilters.sortBell = sortBell
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortBell
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonBell, arrShape, 'shape', 'sortBell')
             break;
         case buttonBall:
-            setTimeout(() => {
-                if (buttonBall.checked) {
-                    allFilters.sortBall = sortBall
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortBall
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonBall, arrShape, 'shape', 'sortBall')
             break;
         case buttonCone:
-            setTimeout(() => {
-                if (buttonCone.checked) {
-                    allFilters.sortCone = sortCone
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortCone
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonCone, arrShape, 'shape', 'sortCone')
             break;
         case buttonSnowflake:
-            setTimeout(() => {
-                if (buttonSnowflake.checked) {
-                    allFilters.sortSnowflake = sortSnowflake
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortSnowflake
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonSnowflake, arrShape, 'shape', 'sortSnowflake')
             break;
         case buttonToy:
-            setTimeout(() => {
-                if (buttonToy.checked) {
-                    allFilters.sortToy = sortToy
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortToy
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonToy, arrShape, 'shape', 'sortToy')
             break;
         case buttonWhite:
-            setTimeout(() => {
-                if (buttonWhite.checked) {
-                    allFilters.sortWhite = sortWhite
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortWhite
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonWhite, arrColor, 'color', 'sortWhite')
             break;
         case buttonYellow:
-            setTimeout(() => {
-                if (buttonYellow.checked) {
-                    allFilters.sortYellow = sortYellow
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortYellow
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonYellow, arrColor, 'color', 'sortYellow')
             break;
         case buttonRed:
-            setTimeout(() => {
-                if (buttonRed.checked) {
-                    allFilters.sortRed = sortRed
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortRed
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonRed, arrColor, 'color', 'sortRed')
             break;
         case buttonBlue:
-            setTimeout(() => {
-                if (buttonBlue.checked) {
-                    allFilters.sortBlue = sortBlue
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortBlue
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonBlue, arrColor, 'color', 'sortBlue')
             break;
         case buttonGreen:
-            setTimeout(() => {
-                if (buttonGreen.checked) {
-                    allFilters.sortGreen = sortGreen
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortGreen
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonGreen, arrColor, 'color', 'sortGreen')
             break;
         case buttonLargeSize:
-            setTimeout(() => {
-                if (buttonLargeSize.checked) {
-                    allFilters.sortLargeSize = sortLargeSize
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortLargeSize
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonLargeSize, arrSize, 'size', 'sortLargeSize')
             break;
         case buttonMediumSize:
-            setTimeout(() => {
-                if (buttonMediumSize.checked) {
-                    allFilters.sortMediumSize = sortMediumSize
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortMediumSize
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonMediumSize, arrSize, 'size', 'sortMediumSize')
             break;
         case buttonSmallSize:
-            setTimeout(() => {
-                if (buttonSmallSize.checked) {
-                    allFilters.sortSmallSize = sortSmallSize
-                    addCards(sortedArr)
-                } else {
-                    delete allFilters.sortSmallSize
-                    addCards(sortedArr)
-                }
-            }, 100);
+            functionOnClick(buttonSmallSize, arrSize, 'size', 'sortSmallSize')
             break;
         default:
             break;
