@@ -1,0 +1,179 @@
+.tree {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  padding: 0 100px;
+  display: flex;
+  flex-grow: 1;
+}
+button {
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+}
+.aside {
+  // position: fixed;
+  // height: 90vh;
+  // border: 1px solid #278d9f;
+  // background: #192f2d;
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25%;
+
+  &__tittle {
+    font-family: Neucha;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 22px;
+    text-transform: uppercase;
+  }
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
+.tree-list {
+  padding-bottom: 15px;
+  &__item {
+    width: 130px;
+    height: 130px;
+    border: 1px solid #278d9f;
+    border-radius: 10px;
+    &_1 {
+      background: rgba(31, 112, 127, 0.5) url(../../assets/tree/1.png) 50% no-repeat;
+      background-size: contain;
+    }
+    &_2 {
+      background: rgba(31, 112, 127, 0.5) url(../../assets/tree/2.png) 50% no-repeat;
+      background-size: contain;
+    }
+    &_3 {
+      background: rgba(31, 112, 127, 0.5) url(../../assets/tree/3.png) 50% no-repeat;
+      background-size: contain;
+    }
+    &_4 {
+      background: rgba(31, 112, 127, 0.5) url(../../assets/tree/4.png) 50% no-repeat;
+      background-size: contain;
+    }
+    &_5 {
+      background: rgba(31, 112, 127, 0.5) url(../../assets/tree/5.png) 50% no-repeat;
+      background-size: contain;
+    }
+    &_6 {
+      background: rgba(31, 112, 127, 0.5) url(../../assets/tree/6.png) 50% no-repeat;
+      background-size: contain;
+    }
+  }
+}
+
+.bg-list {
+  padding-bottom: 15px;
+  &__item {
+    width: 69px;
+    height: 69px;
+    border-radius: 10px;
+    &_1 {
+      background: url(../../assets/bg/1.jpg) no-repeat;
+      background-size: cover;
+    }
+    &_2 {
+      background: url(../../assets/bg/2.jpg) no-repeat;
+      background-size: cover;
+    }
+    &_3 {
+      background: url(../../assets/bg/3.jpg) no-repeat;
+      background-size: cover;
+    }
+    &_4 {
+      background: url(../../assets/bg/4.jpg) no-repeat;
+      background-size: cover;
+    }
+    &_5 {
+      background: url(../../assets/bg/5.jpg) no-repeat;
+      background-size: cover;
+    }
+    &_6 {
+      background: url(../../assets/bg/6.jpg) no-repeat;
+      background-size: cover;
+    }
+    &_7 {
+      background: url(../../assets/bg/7.jpg) no-repeat;
+      background-size: cover;
+    }
+    &_8 {
+      background: url(../../assets/bg/7.jpg) no-repeat;
+      background-size: cover;
+    }
+    &_9 {
+      background: url(../../assets/bg/9.jpg) no-repeat;
+      background-size: cover;
+    }
+    &_10 {
+      background: url(../../assets/bg/10.jpg) no-repeat;
+      background-size: cover;
+    }
+  }
+}
+
+.garland {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  &__color {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    &_motley {
+      background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8);
+    box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, #ccc 0 2px 12px;
+    }
+    &_yellow {
+      background: #ffff00;
+      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
+    }
+    &_blue {
+      background: #0000ff;
+      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3f8cff 0 2px 14px;
+    }
+    &_red {
+      background: #ff0000;
+      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgb(255 0 0 / 50%) 0 2px 12px;
+    }
+  }
+}
+.aside-rigth {
+  padding: 50px 0;
+  width: 25%;
+}
+.toys {
+  padding-top: 15px;
+  &__item {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #278d9f;
+    border-radius: 10px;
+    background-color: rgba(31, 112, 127, 0.5);
+  }
+  &__number{
+    border-radius: 10px;
+    background-color: #24C5DB;
+    width: 25px;
+    height: 25px;
+
+  }
+}
+
+.work-panel {
+  width: 50%;
+  margin: 0 30px;
+  background: url(../../assets/bg/1.jpg);
+  background-size: cover;
+}
