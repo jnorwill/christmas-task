@@ -10,6 +10,14 @@ const openPage = (newPage: string) => {
 }
 openPage(homeHtml)
 
+const addSelected = () => {
+    const localStorageSelectedArr = localStorage.getItem('selected card').split(',').filter(Boolean)
+    const selectHtml = document.querySelector('.selected')
+    selectHtml.innerHTML = `${localStorageSelectedArr.length}`
+    console.log(localStorageSelectedArr)
+}
+addSelected()
+
 document.addEventListener('click', (event) => {
 
     const buttonHome = document.getElementById('button-home')
@@ -20,15 +28,18 @@ document.addEventListener('click', (event) => {
     switch (event.target) {
         case buttonHome:
             openPage(homeHtml)
+            addSelected()
             break;
         case buttonTree:
             openPage(treeHtml)
             treeRunScript()
+            addSelected()
             break;
         case buttonStart:
         case buttonSetting:
             openPage(settingsHtml)
             settingsRunScript()
+            addSelected()
             break;
         default:
             break;
