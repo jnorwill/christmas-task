@@ -1,71 +1,52 @@
 <div class="tree">
-  <header class="header">
-    <nav class="nav">
-      <button class="nav__button nav__decorations">Игрушки</button>
-      <button class="nav__button nav__tree">Ёлка</button>
-    </nav>
-    <div class="header__container">
-      <button class="header__snow"></button>
-      <button class="header__sound"></button>
-      <div class="selected"></div>
+  <aside class="aside aside-left">
+    <h3 class="aside__tittle">Выберите ёлку</h3>
+    <div>
+      <div class="tree-list aside__list">
+        <button data-tree="1" class="tree-list__item tree-list__item_1"></button>
+        <button data-tree="2" class="tree-list__item tree-list__item_2"></button>
+        <button data-tree="3" class="tree-list__item tree-list__item_3"></button>
+      </div>
+      <div class="tree-list aside__list">
+        <button data-tree="4" class="tree-list__item tree-list__item_4"></button>
+        <button data-tree="5" class="tree-list__item tree-list__item_5"></button>
+        <button data-tree="6" class="tree-list__item tree-list__item_6"></button>
+      </div>
     </div>
-  </header>
-  <main class="main">
-    <aside class="aside">
-      <h3 class="aside__tittle">Выберите ёлку</h3>
-      <div>
-        <div class="tree-list aside__list">
-          <button class="tree-list__item tree-list__item_1"></button>
-          <button class="tree-list__item tree-list__item_2"></button>
-          <button class="tree-list__item tree-list__item_3"></button>
-        </div>
-        <div class="tree-list aside__list">
-          <button class="tree-list__item tree-list__item_4"></button>
-          <button class="tree-list__item tree-list__item_5"></button>
-          <button class="tree-list__item tree-list__item_6"></button>
-        </div>
+    <h3 class="aside__tittle">Выберите фон</h3>
+    <div>
+      <div class="bg-list aside__list">
+        <button data-bg="1" class="bg-list__item bg-list__item_1"></button>
+        <button data-bg="2" class="bg-list__item bg-list__item_2"></button>
+        <button data-bg="3" class="bg-list__item bg-list__item_3"></button>
+        <button data-bg="4" class="bg-list__item bg-list__item_4"></button>
+        <button data-bg="5" class="bg-list__item bg-list__item_5"></button>
       </div>
-      <h3 class="aside__tittle">Выберите фон</h3>
-      <div>
-        <div class="bg-list aside__list">
-          <button class="bg-list__item bg-list__item_1"></button>
-          <button class="bg-list__item bg-list__item_2"></button>
-          <button class="bg-list__item bg-list__item_3"></button>
-          <button class="bg-list__item bg-list__item_4"></button>
-          <button class="bg-list__item bg-list__item_5"></button>
-        </div>
-        <div class="bg-list aside__list">
-          <button class="bg-list__item bg-list__item_6"></button>
-          <button class="bg-list__item bg-list__item_7"></button>
-          <button class="bg-list__item bg-list__item_8"></button>
-          <button class="bg-list__item bg-list__item_9"></button>
-          <button class="bg-list__item bg-list__item_10"></button>
-        </div>
+      <div class="bg-list aside__list">
+        <button data-bg="6" class="bg-list__item bg-list__item_6"></button>
+        <button data-bg="7" class="bg-list__item bg-list__item_7"></button>
+        <button data-bg="8" class="bg-list__item bg-list__item_8"></button>
+        <button data-bg="9" class="bg-list__item bg-list__item_9"></button>
+        <button data-bg="10" class="bg-list__item bg-list__item_10"></button>
       </div>
-      <h3 class="aside__tittle">Гирлянда</h3>
-      <div class="garland">
-        <button class="garland__color garland__color_motley"></button>
-        <button class="garland__color garland__color_yellow"></button>
-        <button class="garland__color garland__color_blue"></button>
-        <button class="garland__color garland__color_red"></button>
-      </div>
-    </aside>
-    <div class="work-panel">
     </div>
-    <aside class="aside-rigth">
-      <h3 class="aside__tittle">Игрушки</h3>
-      <div class="toys aside__list">
-        <button class="toys__item">
-          <div class="toys__number"></div>
-        </button>
-      </div>
-    </aside>
-  </main>
-  <footer class="footer">
-    <a class="footer__link" href="https://rs.school/js/"><img
-        class="footer__img" src="../../assets/svg/rss.svg" alt="rss"></a>
-    <a class="footer__link" href="https://github.com/jnorwill">App developer:
-      jnorwill</a>
-    <span class="footer__year">2021</span>
-  </footer>
+    <h3 class="aside__tittle">Гирлянда</h3>
+    <div class="garland">
+      <button class="garland__color garland__color_motley"></button>
+      <button class="garland__color garland__color_yellow"></button>
+      <button class="garland__color garland__color_blue"></button>
+      <button class="garland__color garland__color_red"></button>
+    </div>
+    <input type="reset" class="aside__reset" value="Сбросить настройки">
+  </aside>
+  <div class="work-panel">
+    <img class="work-panel__img" src="../../assets/tree/1.png" alt="tree">
+    <area class="work-panel__area" shape="poly" alt="tree"
+      coords="365,699,189,706,113,683,31,608,2,555,2,539,18,437,73,351,106,224,161,134,243,-1,306,75,353,144,399,221,424,359,452,459,496,550,444,664">
+  </div>
+  <aside class="aside aside-rigth">
+    <h3 class="aside__tittle">Игрушки</h3>
+    <div class="toys">
+    </div>
+  </aside>
 </div>
