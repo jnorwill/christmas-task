@@ -14,32 +14,18 @@ export const runScript = () => {
         size: string,
         favorite: boolean,
     }
-    type arrFiltersType = {
-        sortBell?: (item: arrSortType) => boolean,
-        sortBall?: (item: arrSortType) => boolean,
-        sortCone?: (item: arrSortType) => boolean,
-        sortSnowflake?: (item: arrSortType) => boolean,
-        sortToy?: (item: arrSortType) => boolean,
-        sortWhite?: (item: arrSortType) => boolean,
-        sortYellow?: (item: arrSortType) => boolean,
-        sortRed?: (item: arrSortType) => boolean,
-        sortBlue?: (item: arrSortType) => boolean,
-        sortGreen?: (item: arrSortType) => boolean,
-        sortLargeSize?: (item: arrSortType) => boolean,
-        sortMediumSize?: (item: arrSortType) => boolean,
-        sortSmallSize?: (item: arrSortType) => boolean,
-    }
 
     let newData: arrSortType[]
     const addCards = () => {
         const selectesToysList = document.querySelector('.toys')
-        selectesToysList.innerHTML = ''
+        if (selectesToysList) { selectesToysList.innerHTML = '' }
 
-        const arr = localStorage.getItem('selected card').split(',')
+
+        const arr = localStorage.getItem('selected card')?.split(',')
 
         if (localStorage.getItem('selected card')) {
             newData = data.filter((element: arrSortType) => {
-                return arr.some((item: string) => {
+                return arr?.some((item: string) => {
                     return item === element.name
                 })
             })
@@ -49,26 +35,34 @@ export const runScript = () => {
 
         newData.forEach((item: arrSortType) => {
             if (+item.count > 0) {
-                let cardToyButton = document.createElement('button');
+                const cardToyButton = document.createElement('button');
                 cardToyButton.className = 'toys__item'
-                selectesToysList.append(cardToyButton);
+                selectesToysList?.append(cardToyButton);
 
-                let cardToyImg = document.createElement('img');
+                const cardToyImg = document.createElement('img');
                 cardToyImg.className = 'toys__img'
-                cardToyImg.dataset.toy = `${item.num}`
-                const src = require(`src/assets/toys/${item.num}.png`)
-                cardToyImg.src = src
+                cardToyImg.dataset.toy = item.num
+
+                import(`src/assets/toys/${item.num}.png`).then((src: string) => {
+                    cardToyImg.src = src
+                }).catch((error) => {
+                    console.log(error)
+                })
                 cardToyImg.draggable = true
 
                 cardToyImg.ondragstart = (event) => {
                     console.log('ondragstart')
-                    event.dataTransfer.setData("application/cardToyImg", cardToyImg.dataset.toy);
-
-                    event.dataTransfer.effectAllowed = "move";
+                    const mediator = cardToyImg.dataset.toy
+                    if (mediator) {
+                        event.dataTransfer?.setData("application/cardToyImg", `${mediator}`);
+                    }
+                    if (event.dataTransfer) {
+                        event.dataTransfer.effectAllowed = "move";
+                    }
                 }
                 cardToyButton.append(cardToyImg);
 
-                let cardToysCount = document.createElement('div');
+                const cardToysCount = document.createElement('div');
                 cardToysCount.className = 'toys__count'
                 cardToysCount.innerHTML = `${item.count}`
                 cardToyButton.append(cardToysCount);
@@ -82,13 +76,19 @@ export const runScript = () => {
 
     const changeTree = (dataSetValue: string) => {
         const image = document.querySelector('.work-panel__img') as HTMLImageElement
-        const src = require(`src/assets/tree/${dataSetValue}.png`)
-        image.src = src
+        import(`src/assets/tree/${dataSetValue}.png`).then((src: string) => {
+            image.src = src
+        }).catch((error) => {
+            console.log(error)
+        })
     }
-
     const changeBg = (dataSetValue: string) => {
-        const image = require(`src/assets/bg/${dataSetValue}.jpg`)
-        workPanel.style.backgroundImage = `url(${image})`
+
+        import(`src/assets/bg/${dataSetValue}.png`).then((src: string) => {
+            workPanel.style.backgroundImage = `url(${src})`
+        }).catch((error) => {
+            console.log(error)
+        })
     }
 
 
@@ -106,21 +106,23 @@ export const runScript = () => {
         }
     })
 
-    const tree = document.querySelector('.work-panel__img') as HTMLElement
-        const treeArea = document.querySelector('.work-panel__area') as HTMLElement
-        // document.addEventListener('mousemove', (event) => console.log(event.target))
+    const treeArea = document.querySelector('.work-panel__area') as HTMLElement
     treeArea.ondragover = (event) => {
         event.preventDefault();
         console.log('ondragover')
-        event.dataTransfer.dropEffect = "move"
+        if (event.dataTransfer) {
+            event.dataTransfer.dropEffect = "move"
+        }
     }
 
     treeArea.ondrop = (event) => {
         event.preventDefault();
-        console.log(event.dataTransfer.getData("application/cardToyImg"))
-        const data = event.dataTransfer.getData("application/cardToyImg");
+        console.log(event.dataTransfer?.getData("application/cardToyImg"))
+        let data = ''
+        const mediator = event.dataTransfer?.getData("application/cardToyImg")
+        if (mediator) { data = mediator }
         const treeArea = document.querySelector('.work-panel__area') as HTMLElement
-        const newElement = document.querySelector(`[data-toy="${data}"]`).cloneNode() as HTMLElement
+        const newElement = document.querySelector(`[data-toy="${data}"]`)?.cloneNode() as HTMLElement
         newElement.style.left = `${event.pageX}px`
         newElement.style.top = `${event.pageY}px`
 
@@ -128,7 +130,7 @@ export const runScript = () => {
 
 
         newData.map((item) => {
-            if(item.num === newElement.dataset.toy){
+            if (item.num === newElement.dataset.toy) {
                 item.count = `${+item.count - 1}`
             }
             return item
