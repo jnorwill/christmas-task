@@ -43,8 +43,8 @@ export const runScript = () => {
                 cardToyImg.className = 'toys__img'
                 cardToyImg.dataset.toy = item.num
 
-                import(`src/assets/toys/${item.num}.png`).then((src: string) => {
-                    cardToyImg.src = src
+                import(`src/assets/toys/${item.num}.png`).then((module) => {
+                    cardToyImg.src = module.default
                 }).catch((error) => {
                     console.log(error)
                 })

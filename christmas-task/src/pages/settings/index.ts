@@ -153,12 +153,12 @@ export const runScript = () => {
 
             const cardImg = document.createElement('img');
             cardImg.className = "card__img";
-            import(`src/assets/toys/${item.num}.png`).then((src: string) => {
-                cardImg.src = src
-                leftCardContainer.append(cardImg);
+            import(`src/assets/toys/${item.num}.png`).then((module) => {
+                cardImg.src = module.default
             }).catch((error) => {
                 console.log(error)
             })
+            leftCardContainer.append(cardImg);
 
             const cardButton = document.createElement('button');
             cardButton.className = "card__button"

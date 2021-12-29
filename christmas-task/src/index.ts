@@ -6,14 +6,14 @@ import settingsHtml, { runScript as settingsRunScript } from './pages/settings'
 
 const openPage = (newPage: string) => {
     const mainElement = document.getElementById('main')
-    mainElement.innerHTML = newPage
+    if(mainElement){mainElement.innerHTML = newPage}
 }
 openPage(homeHtml)
 
 const addSelected = () => {
-    const localStorageSelectedArr = localStorage.getItem('selected card').split(',').filter(Boolean)
+    const localStorageSelectedArr = localStorage.getItem('selected card')?.split(',').filter(Boolean)
     const selectHtml = document.querySelector('.selected')
-    selectHtml.innerHTML = `${localStorageSelectedArr.length}`
+    if (selectHtml) {selectHtml.innerHTML = `${localStorageSelectedArr?.length}`}
     console.log(localStorageSelectedArr)
 }
 addSelected()
