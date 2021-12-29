@@ -170,9 +170,17 @@
     border: 1px solid #278d9f;
     border-radius: 10px;
     background-color: rgba(31, 112, 127, 0.5);
-    background-position: center;
-    background-repeat: no-repeat;
     background-size: 70% auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__img {
+    width: 60px;
+    height: 60px;
   }
   &__count {
     border-radius: 10px;
@@ -189,22 +197,25 @@
 }
 
 .work-panel {
-  // height: 2000px;
-  height: calc(100vh - 140px);
-  width: 50%;
+  min-height: 750px;
+  width: 800px;
   margin: 0 30px;
   background: url(../../assets/bg/1.jpg);
   background-size: cover;
   position: relative;
   &__img {
-    height: 90%;
-    width: auto;
+    width: 500px;
+    height: 714px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  &__area{
-    background: black;
+  &__area {
+    img {
+      position: fixed;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+    }
   }
 }
