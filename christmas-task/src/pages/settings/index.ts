@@ -158,7 +158,7 @@ export const runScript = () => {
     
             let cardImg = document.createElement('img');
             cardImg.className = "card__img"
-            const src = require(`src/assets/toys/${item.count}.png`)
+            const src = require(`src/assets/toys/${item.num}.png`)
             cardImg.src = `${src}`
             leftCardContainer.append(cardImg);
     
