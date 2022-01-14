@@ -51,6 +51,11 @@
     height: 130px;
     border: 1px solid #278d9f;
     border-radius: 10px;
+    transition: 0.3s;
+      &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+      }
     &_1 {
       background: rgba(31, 112, 127, 0.5) url(../../assets/tree/1.png) 50% no-repeat;
       background-size: contain;
@@ -84,6 +89,11 @@
     width: 69px;
     height: 69px;
     border-radius: 10px;
+    transition: 0.3s;
+      &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+      }
     &_1 {
       background: url(../../assets/bg/1.jpg) no-repeat;
       background-size: cover;

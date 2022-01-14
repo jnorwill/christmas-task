@@ -1,3 +1,6 @@
+declare global {
+    interface Window { activeCbId: string; }
+}
 import './index.scss'
 import data from '../../data'
 export { default } from './index.html'
@@ -295,7 +298,6 @@ export const runScript = () => {
             if (mediator) { selectArr.push(mediator) }
         });
         if (selectHtml) { selectHtml.innerHTML = `${selectArr.length}` }
-
     }
 
     const addSelectNumber = () => {
@@ -324,20 +326,25 @@ export const runScript = () => {
             }
             allAppliedFilters[funcType][funcName] = globalFilters[funcType][funcName]
             funcArr.push(`${funcName}`)
-            localStorage.setItem(`${funcType}`, JSON.stringify(funcArr))
+            localStorage.setItem(`${funcType}`, funcArr.join(','))
             formSortedArr()
             addCards(sortedArr)
         } else {
             const index = funcArr.findIndex((item: string) => item === `${funcName}`)
             funcArr.splice(index, 1)
-            localStorage.setItem(`${funcType}`,  JSON.stringify(funcArr))
+            localStorage.setItem(`${funcType}`, funcArr.join(','))
+            console.log('funcArr', funcArr)
+    
             setTimeout(() => {
                 const localStorageSort = localStorage.getItem(`${funcType}`)
+                console.log( localStorageSort)
                 if (localStorageSort) {
+                    console.log("11", localStorageSort)
                     delete allAppliedFilters[funcType][funcName]
                     formSortedArr()
                     addCards(sortedArr)
                 } else {
+                    console.log("22", localStorageSort)
                     allAppliedFilters[funcType] = { ...globalFilters[funcType] }
                     formSortedArr()
                     addCards(sortedArr)
@@ -347,7 +354,13 @@ export const runScript = () => {
 
     }
 
-    document.addEventListener('click', (event) => {
+    const cbId = String(Math.random()) + String(Math.random()) + String(Math.random())
+
+    
+    window.activeCbId = cbId;
+
+    const addSelected = (event: Event) => {
+        if ((window as any).activeCbId !== cbId) return
 
         const buttonSelect = event.target as HTMLElement
         if (buttonSelect.classList.contains('card__button')) {
@@ -374,15 +387,24 @@ export const runScript = () => {
                 buttonSelect.classList.remove('card__button_active')
                 selectArr.splice(index, 1)
                 addSelectNumber()
+                console.log(selectArr)
             }
             // const arrName: (string | undefined)[] = selectArr.map(item => item?.name)
             // localStorage.setItem('selected card', `${arrName.join(',')}`)
-
+            let arrName: string[] = []
             selectArr.forEach(item => {
-                if (item?.name) { selectArr.push(item) }
+                if (item?.name) {
+                    arrName.push(item.name)
+                }
             })
-            localStorage.setItem('selected card', `${selectArr.join(',')}`)
+            console.log('##', selectArr)
+            localStorage.setItem('selected card', arrName.join(','))
         }
+    }
+
+    document.addEventListener('click', addSelected)
+
+    document.addEventListener('click', (event) => {
 
         switch (event.target) {
             case buttonBell:

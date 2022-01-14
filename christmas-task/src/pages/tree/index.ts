@@ -51,7 +51,6 @@ export const runScript = () => {
                 cardToyImg.draggable = true
 
                 cardToyImg.ondragstart = (event) => {
-                    console.log('ondragstart')
                     const mediator = cardToyImg.dataset.toy
                     if (mediator) {
                         event.dataTransfer?.setData("application/cardToyImg", `${mediator}`);
@@ -76,16 +75,15 @@ export const runScript = () => {
 
     const changeTree = (dataSetValue: string) => {
         const image = document.querySelector('.work-panel__img') as HTMLImageElement
-        import(`src/assets/tree/${dataSetValue}.png`).then((src: string) => {
-            image.src = src
+        import(`src/assets/tree/${dataSetValue}.png`).then((module) => {
+            image.src = module.default
         }).catch((error) => {
             console.log(error)
         })
     }
     const changeBg = (dataSetValue: string) => {
-
-        import(`src/assets/bg/${dataSetValue}.png`).then((src: string) => {
-            workPanel.style.backgroundImage = `url(${src})`
+        import(`src/assets/bg/${dataSetValue}.jpg`).then((module) => {
+            workPanel.style.backgroundImage = `url(${module.default})`
         }).catch((error) => {
             console.log(error)
         })
@@ -103,21 +101,20 @@ export const runScript = () => {
         const dataBgValue = actionType.dataset.bg
         if (dataBgValue) {
             changeBg(dataBgValue)
+
         }
     })
 
     const treeArea = document.querySelector('.work-panel__area') as HTMLElement
     treeArea.ondragover = (event) => {
-        event.preventDefault();
-        console.log('ondragover')
+        event.preventDefault()
         if (event.dataTransfer) {
             event.dataTransfer.dropEffect = "move"
         }
     }
 
     treeArea.ondrop = (event) => {
-        event.preventDefault();
-        console.log(event.dataTransfer?.getData("application/cardToyImg"))
+        event.preventDefault()
         let data = ''
         const mediator = event.dataTransfer?.getData("application/cardToyImg")
         if (mediator) { data = mediator }
@@ -126,7 +123,7 @@ export const runScript = () => {
         newElement.style.left = `${event.pageX}px`
         newElement.style.top = `${event.pageY}px`
 
-        treeArea.append(newElement);
+        treeArea.append(newElement)
 
 
         newData.map((item) => {
